@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Eagle Community - Session Recap</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap');
+
+  :root {
+    --eagle-gold: #D4A843;
+    --eagle-dark: #1A1A2E;
+    --eagle-navy: #16213E;
+    --eagle-blue: #0F3460;
+    --eagle-accent: #E94560;
+    --silver: #C0C0C0;
+    --gold: #FFD700;
+    --diamond: #B9F2FF;
+    --card-bg: rgba(255,255,255,0.05);
+    --text-primary: #FFFFFF;
+    --text-secondary: #A0AEC0;
+    --gradient-1: linear-gradient(135deg, #D4A843, #F0D078);
+    --gradient-accent: linear-gradient(135deg, #E94560, #FF6B6B);
+    --gradient-blue: linear-gradient(135deg, #0F3460, #533483);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--eagle-dark);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Hero Section */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+    background: radial-gradient(ellipse at 50% 30%, rgba(212,168,67,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(233,69,96,0.08) 0%, transparent 50%),
+                var(--eagle-dark);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4A843' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+
+  .eagle-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 30px rgba(212,168,67,0.4));
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+
+  .hero .subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--text-secondary);
+    font-weight: 300;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+
+  .hero .tagline {
+    font-size: 1.1rem;
+    color: var(--eagle-gold);
+    font-weight: 500;
+    padding: 12px 28px;
+    border: 1px solid rgba(212,168,67,0.3);
+    border-radius: 50px;
+    display: inline-block;
+    backdrop-filter: blur(10px);
+    background: rgba(212,168,67,0.08);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    animation: bounce 2s infinite;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(8px); opacity: 1; }
+  }
+
+  /* Section Styles */
+  section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--eagle-gold);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    max-width: 600px;
+    line-height: 1.7;
+    margin-bottom: 50px;
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--eagle-gold), var(--eagle-accent), var(--eagle-blue));
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 36px;
+    padding: 24px 28px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .timeline-item:hover {
+    transform: translateX(6px);
+    border-color: rgba(212,168,67,0.3);
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -34px;
+    top: 30px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--eagle-gold);
+    border: 3px solid var(--eagle-dark);
+    box-shadow: 0 0 12px rgba(212,168,67,0.5);
+  }
+
+  .timeline-year {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--eagle-gold);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .timeline-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .timeline-desc {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  /* Stats Bar */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 50px 0;
+  }
+
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212,168,67,0.3);
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .stat-label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-top: 6px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  /* TNDS Event Section */
+  .event-banner {
+    background: linear-gradient(135deg, rgba(15,52,96,0.6), rgba(83,52,131,0.6));
+    border: 1px solid rgba(212,168,67,0.2);
+    border-radius: 24px;
+    padding: 50px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 50px;
+  }
+
+  .event-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(212,168,67,0.06) 0%, transparent 60%);
+    animation: rotate 20s linear infinite;
+  }
+
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .event-date {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    color: var(--eagle-gold);
+    position: relative;
+  }
+
+  .event-name {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin: 10px 0 20px;
+    position: relative;
+  }
+
+  .event-venue {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    position: relative;
+  }
+
+  .event-venue strong {
+    color: var(--text-primary);
+  }
+
+  /* Ticket Cards */
+  .tickets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .ticket-card {
+    border-radius: 20px;
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+
+  .ticket-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .ticket-card.silver {
+    background: linear-gradient(135deg, rgba(192,192,192,0.08), rgba(192,192,192,0.02));
+    border: 1px solid rgba(192,192,192,0.2);
+  }
+
+  .ticket-card.gold {
+    background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,215,0,0.02));
+    border: 1px solid rgba(255,215,0,0.25);
+  }
+
+  .ticket-card.diamond {
+    background: linear-gradient(135deg, rgba(185,242,255,0.1), rgba(185,242,255,0.02));
+    border: 2px solid rgba(185,242,255,0.3);
+  }
+
+  .ticket-tier {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .ticket-card.silver .ticket-tier { color: var(--silver); }
+  .ticket-card.gold .ticket-tier { color: var(--gold); }
+  .ticket-card.diamond .ticket-tier { color: var(--diamond); }
+
+  .ticket-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+  }
+
+  .ticket-features {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+
+  .ticket-features li {
+    padding: 6px 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+
+  .ticket-features li::before {
+    content: '~';
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .ticket-card.silver .ticket-features li::before { color: var(--silver); }
+  .ticket-card.gold .ticket-features li::before { color: var(--gold); }
+  .ticket-card.diamond .ticket-features li::before { color: var(--diamond); }
+
+  .ticket-limit {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 8px;
+  }
+
+  .ticket-card.diamond .ticket-limit {
+    background: rgba(185,242,255,0.1);
+    color: var(--diamond);
+    border: 1px solid rgba(185,242,255,0.2);
+  }
+
+  /* Focus Areas */
+  .focus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .focus-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 28px 24px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .focus-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212,168,67,0.3);
+  }
+
+  .focus-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+  }
+
+  .focus-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .focus-card p {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  /* Eagle Awards */
+  .awards-section {
+    background: linear-gradient(135deg, rgba(212,168,67,0.08), rgba(233,69,96,0.05));
+    border: 1px solid rgba(212,168,67,0.15);
+    border-radius: 24px;
+    padding: 50px 40px;
+    margin: 40px 0;
+  }
+
+  .award-tiers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .award-badge {
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(212,168,67,0.3);
+    background: rgba(212,168,67,0.08);
+    color: var(--eagle-gold);
+    transition: all 0.3s;
+  }
+
+  .award-badge:hover {
+    background: rgba(212,168,67,0.15);
+    transform: scale(1.05);
+  }
+
+  .award-badge.special {
+    border-color: rgba(233,69,96,0.4);
+    background: rgba(233,69,96,0.1);
+    color: var(--eagle-accent);
+  }
+
+  /* Future Founders Lab */
+  .founders-hero {
+    background: linear-gradient(135deg, rgba(233,69,96,0.08), rgba(83,52,131,0.1));
+    border: 1px solid rgba(233,69,96,0.15);
+    border-radius: 24px;
+    padding: 50px 40px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .founders-hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 12px;
+  }
+
+  .founders-hero .age-badge {
+    display: inline-block;
+    padding: 8px 24px;
+    border-radius: 50px;
+    background: rgba(233,69,96,0.15);
+    color: var(--eagle-accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: 12px;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+  }
+
+  .skill-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .skill-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(233,69,96,0.3);
+  }
+
+  .skill-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--eagle-accent);
+    opacity: 0.7;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 36px;
+  }
+
+  .skill-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .skill-card p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+
+  /* Program Structure */
+  .program-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+  }
+
+  .program-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 28px 24px;
+  }
+
+  .program-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: var(--eagle-gold);
+  }
+
+  .program-card p, .program-card li {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .program-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .program-card ul li {
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .program-card ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--eagle-gold);
+    opacity: 0.5;
+  }
+
+  /* Batch Timeline */
+  .batch-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin: 40px 0;
+  }
+
+  .batch-card {
+    background: linear-gradient(135deg, rgba(233,69,96,0.06), rgba(83,52,131,0.06));
+    border: 1px solid rgba(233,69,96,0.15);
+    border-radius: 16px;
+    padding: 28px 24px;
+  }
+
+  .batch-card h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--eagle-accent);
+  }
+
+  .batch-detail {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.9rem;
+  }
+
+  .batch-detail span:first-child {
+    color: var(--text-secondary);
+  }
+
+  .batch-detail span:last-child {
+    font-weight: 600;
+  }
+
+  /* Investment Section */
+  .investment-box {
+    background: linear-gradient(135deg, rgba(212,168,67,0.1), rgba(212,168,67,0.02));
+    border: 2px solid rgba(212,168,67,0.25);
+    border-radius: 24px;
+    padding: 50px 40px;
+    text-align: center;
+    margin: 40px 0;
+  }
+
+  .price-tag {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .price-sub {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-top: 4px;
+  }
+
+  .guarantee-badge {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 12px 28px;
+    border-radius: 12px;
+    background: rgba(72, 187, 120, 0.1);
+    border: 1px solid rgba(72, 187, 120, 0.3);
+    color: #68D391;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  /* Recognition Section */
+  .recognition-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 30px;
+  }
+
+  .recognition-item {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    transition: border-color 0.3s;
+  }
+
+  .recognition-item:hover {
+    border-color: rgba(212,168,67,0.2);
+  }
+
+  .recognition-item strong {
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* Action Items Footer */
+  .action-footer {
+    background: linear-gradient(135deg, var(--eagle-navy), var(--eagle-blue));
+    border: 1px solid rgba(212,168,67,0.2);
+    border-radius: 24px;
+    padding: 50px 40px;
+    margin-top: 60px;
+  }
+
+  .action-list {
+    list-style: none;
+    margin-top: 30px;
+  }
+
+  .action-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .action-list li:last-child {
+    border-bottom: none;
+  }
+
+  .action-check {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--eagle-gold);
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .action-priority {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .priority-urgent {
+    background: rgba(233,69,96,0.2);
+    color: var(--eagle-accent);
+  }
+
+  .priority-soon {
+    background: rgba(212,168,67,0.2);
+    color: var(--eagle-gold);
+  }
+
+  /* CTA Buttons */
+  .cta-btn {
+    display: inline-block;
+    padding: 14px 36px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-btn.gold-btn {
+    background: var(--gradient-1);
+    color: var(--eagle-dark);
+    box-shadow: 0 4px 20px rgba(212,168,67,0.3);
+  }
+
+  .cta-btn.gold-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(212,168,67,0.45);
+  }
+
+  .cta-btn.accent-btn {
+    background: var(--gradient-accent);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(233,69,96,0.3);
+  }
+
+  .cta-btn.accent-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(233,69,96,0.45);
+  }
+
+  .cta-btn.outline-btn {
+    background: transparent;
+    color: var(--eagle-gold);
+    border: 2px solid var(--eagle-gold);
+  }
+
+  .cta-btn.outline-btn:hover {
+    background: rgba(212,168,67,0.1);
+    transform: translateY(-2px);
+  }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,168,67,0.3), transparent);
+    margin: 0 auto;
+    max-width: 400px;
+  }
+
+  /* Footer */
+  .page-footer {
+    text-align: center;
+    padding: 60px 20px 40px;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    section { padding: 50px 16px; }
+    .event-banner, .awards-section, .founders-hero, .investment-box, .action-footer { padding: 32px 20px; }
+    .tickets-grid { grid-template-columns: 1fr; }
+    .timeline { padding-left: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="eagle-icon">&#x1F985;</div>
+  <h1>Social Eagle Community</h1>
+  <p class="subtitle">Session Recap & Roadmap</p>
+  <div class="tagline">Human to Human. Heart to Heart.</div>
+  <div class="scroll-hint">SCROLL TO EXPLORE</div>
+</header>
+
+<!-- Journey Timeline -->
+<section>
+  <p class="section-label">The Journey</p>
+  <h2 class="section-title">From Agency to<br>Community Powerhouse</h2>
+  <p class="section-desc">A decade of evolution, from marketing agency to India's most transformation-focused digital community.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">2015</div>
+      <div class="timeline-title">Started as a Marketing Agency</div>
+      <div class="timeline-desc">The seed was planted. Social Eagle began its journey as a digital marketing agency.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2016</div>
+      <div class="timeline-title">Evolved into an Academy</div>
+      <div class="timeline-desc">Students who couldn't afford agency fees needed training. The academy was born from necessity.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2017 - 2019</div>
+      <div class="timeline-title">International Expansion</div>
+      <div class="timeline-desc">Fortune 500 clients: Nestle, Nature Valley, Haagen-Dazs, Singapore Management University, Merrill Lynch. The world took notice.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2020</div>
+      <div class="timeline-title">21 Day Challenge Launched</div>
+      <div class="timeline-desc">The online era began. What started as a challenge evolved into annual subscriptions and lifetime memberships.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2021 - 2024</div>
+      <div class="timeline-title">Programs Multiplied</div>
+      <div class="timeline-desc">EOS, Digital Entrepreneurship, Agency Boardroom, EnergyX, Sales Operating System, Reclaim Your Life. Each program solving a specific need.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2025 - NOW</div>
+      <div class="timeline-title">Social Eagle Community (SEC)</div>
+      <div class="timeline-desc">All programs unified under one roof. Evolved into a school model. AI community launched. The next chapter begins.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Achievements -->
+<section>
+  <p class="section-label">Recent Wins</p>
+  <h2 class="section-title">Achievements & Recognition</h2>
+
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-number">78</div>
+      <div class="stat-label">EOS Batch 1 Members</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">36%</div>
+      <div class="stat-label">Achieved 3-5x Growth</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">3</div>
+      <div class="stat-label">Startup Investments</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">190</div>
+      <div class="stat-label">EOS Applications</div>
+    </div>
+  </div>
+
+  <div class="recognition-grid">
+    <div class="recognition-item">
+      <strong>Startup Stars</strong>Featured coverage
+    </div>
+    <div class="recognition-item">
+      <strong>Patrician College</strong>Legacy Award for Digital Marketing Excellence
+    </div>
+    <div class="recognition-item">
+      <strong>Entrepreneur Magazine</strong>Pioneer of Change Award
+    </div>
+    <div class="recognition-item">
+      <strong>Reclaim Your Life</strong>Book launched with top endorsements
+    </div>
+    <div class="recognition-item">
+      <strong>Academia</strong>Sessions at IIM, Anna University, MIT
+    </div>
+    <div class="recognition-item">
+      <strong>Former Governor</strong>Official appreciation
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TNDS 2025 -->
+<section>
+  <p class="section-label">Mark Your Calendar</p>
+  <h2 class="section-title">TNDS 2025</h2>
+  <p class="section-desc">Tamil Nadu Digital Summit returns bigger, bolder, and more workshop-focused than ever before.</p>
+
+  <div class="event-banner">
+    <div class="event-date">May 23 - 24, 2025</div>
+    <div class="event-name">Tamil Nadu Digital Summit</div>
+    <div class="event-venue"><strong>Feathers Hotel, Chennai</strong> &middot; 750-800 capacity &middot; 2-day non-residential</div>
+    <a href="https://2026.tndigitalsummit.com/" target="_blank" class="cta-btn gold-btn" style="margin-top: 28px;">Register for TNDS 2025</a>
+  </div>
+
+  <p class="section-label">Focus Areas</p>
+  <div class="focus-grid">
+    <div class="focus-card">
+      <div class="focus-icon">&#x1F916;</div>
+      <h4>AI Adoption</h4>
+      <p>Live demonstrations of AI tools, on-platform updates, and practical implementation strategies.</p>
+    </div>
+    <div class="focus-card">
+      <div class="focus-icon">&#x1F4C8;</div>
+      <h4>Scaling & Revenue</h4>
+      <p>Growth strategies from community members who've achieved 10L to 50Cr+ in revenue.</p>
+    </div>
+    <div class="focus-card">
+      <div class="focus-icon">&#x1F3AC;</div>
+      <h4>Content & Digital</h4>
+      <p>New hacks, templates, and frameworks for digital leverage in the current landscape.</p>
+    </div>
+    <div class="focus-card">
+      <div class="focus-icon">&#x1F451;</div>
+      <h4>Leadership in AI Era</h4>
+      <p>Workshop model sessions emphasizing practical learning over pure inspiration.</p>
+    </div>
+  </div>
+
+  <p class="section-label" style="margin-top: 60px;">Ticket Categories</p>
+  <div class="tickets-grid">
+    <div class="ticket-card silver">
+      <div class="ticket-tier">Silver</div>
+      <h3>Conference Access</h3>
+      <ul class="ticket-features">
+        <li>Full 2-day access</li>
+        <li>Lunch and dinner included</li>
+        <li>Conference kit</li>
+        <li>Silver seating area</li>
+      </ul>
+      <a href="https://2026.tndigitalsummit.com/" target="_blank" class="cta-btn outline-btn" style="font-size: 0.8rem; padding: 10px 24px; width: 100%; text-align: center;">Book Silver</a>
+    </div>
+
+    <div class="ticket-card gold">
+      <div class="ticket-tier">Gold</div>
+      <h3>Gold + Learning</h3>
+      <ul class="ticket-features">
+        <li>Everything in Silver</li>
+        <li>5-day live Zoom sessions with Vishnu on Meta Ads</li>
+        <li>5-day live sessions with Manoj on AI Employees</li>
+        <li>Personal mastery course with 5 new tactics</li>
+        <li>60-day video replay access</li>
+      </ul>
+      <a href="https://2026.tndigitalsummit.com/" target="_blank" class="cta-btn gold-btn" style="font-size: 0.8rem; padding: 10px 24px; width: 100%; text-align: center;">Book Gold</a>
+    </div>
+
+    <div class="ticket-card diamond">
+      <div class="ticket-tier">Diamond</div>
+      <h3>VIP Experience</h3>
+      <ul class="ticket-features">
+        <li>Everything in Gold</li>
+        <li>Front row, exclusive Diamond seating</li>
+        <li>Award night access with surprises</li>
+        <li>Exclusive networking arena with speakers, guests & sponsors</li>
+        <li>Exclusive photo opportunities</li>
+        <li>1-year video replay access</li>
+        <li>Separate lunch service with VIPs</li>
+      </ul>
+      <div class="ticket-limit">Only 40 tickets total &middot; Selling fast</div>
+      <a href="https://2026.tndigitalsummit.com/" target="_blank" class="cta-btn accent-btn" style="font-size: 0.8rem; padding: 10px 24px; width: 100%; text-align: center; margin-top: 12px;">Book Diamond</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Eagle Awards -->
+<section>
+  <div class="awards-section">
+    <p class="section-label">Celebrate Wins</p>
+    <h2 class="section-title" style="margin-bottom: 12px;">Eagle Awards</h2>
+    <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; max-width: 600px; margin-bottom: 24px;">
+      Recognizing community members' business achievements. Physical trophies awarded at Reclaim Your Life event.
+      Application deadline: Day 1 of TNDS.
+    </p>
+
+    <a href="https://forms.gle/EKEi1RLJSyctbsP17" target="_blank" class="cta-btn gold-btn" style="margin-bottom: 30px;">Apply for Eagle Award</a>
+    <p style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--eagle-gold); font-weight: 600; margin-bottom: 14px;">Revenue Categories</p>
+    <div class="award-tiers">
+      <span class="award-badge">5 Lakhs</span>
+      <span class="award-badge">10 Lakhs</span>
+      <span class="award-badge">25 Lakhs</span>
+      <span class="award-badge">50 Lakhs</span>
+      <span class="award-badge">75 Lakhs</span>
+      <span class="award-badge">1 Crore</span>
+      <span class="award-badge">5 Crore</span>
+      <span class="award-badge">10 Crore</span>
+      <span class="award-badge special">AI Special Recognition</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Future Founders Lab -->
+<section>
+  <div class="founders-hero">
+    <p class="section-label">New Launch</p>
+    <h2>Future Founders Lab</h2>
+    <p style="color: var(--text-secondary); font-size: 1.05rem; margin-top: 8px;">Building Tomorrow's Leaders Today</p>
+    <div class="age-badge">Ages 9 - 16 &middot; 30-Day Intensive &middot; Max 35 Students</div>
+  </div>
+
+  <p class="section-label">10 Essential Future Skills</p>
+  <h3 class="section-title" style="font-size: 1.6rem; margin-bottom: 30px;">What Schools Don't Teach</h3>
+
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-num">01</div>
+      <div>
+        <h4>Communication & Self-Expression</h4>
+        <p>Confident speaking, concise messaging, storytelling ability</p>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-num">02</div>
+      <div>
+        <h4>Meta Learning</h4>
+        <p>How to learn effectively, self-research, note-taking and memory techniques</p>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-num">03</div>
+      <div>
+        <h4>Focus & Attention Control</h4>
+        <p>Building 30-60 minute focus spans in a high-distraction world</p>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-num">04</div>
+      <div>
+        <h4>Critical Thinking</h4>
+        <p>Asking why, what, and how. Challenging assumptions respectfully</p>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-num">05</div>
+      <div>
+        <h4>Problem Solving</h4>
+        <p>Quick analysis with limited info, decision-making under pressure</p>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-num">06</div>
+      <div>
+        <h4>Building & Execution</h4>
+        <p>Taking action, experimentation, learning by doing, project completion</p>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-num">07</div>
+      <div>
+        <h4>Business & Money Literacy</h4>
+        <p>Value creation, saving vs spending, entrepreneurial thinking</p>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-num">08</div>
+      <div>
+        <h4>Resilience & Growth Mindset</h4>
+        <p>Getting up after failure, bearing loss, emotional strength</p>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-num">09</div>
+      <div>
+        <h4>Emotional Intelligence</h4>
+        <p>Navigating relationships with humans, AI, and machines</p>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-num">10</div>
+      <div>
+        <h4>Systems Thinking</h4>
+        <p>Step-by-step task breakdown, structured approach to outcomes</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Program Structure -->
+  <p class="section-label" style="margin-top: 60px;">Program Details</p>
+  <h3 class="section-title" style="font-size: 1.6rem; margin-bottom: 10px;">30-Day Intensive Program</h3>
+  <p class="section-desc">1 hour daily, 5 live classes + 2 practical activities per week. Tamil & English combined.</p>
+
+  <div class="program-grid">
+    <div class="program-card">
+      <h4>Week 1</h4>
+      <p>Business Foundation</p>
+    </div>
+    <div class="program-card">
+      <h4>Week 2</h4>
+      <p>Marketing, Customer Understanding & Empathy</p>
+    </div>
+    <div class="program-card">
+      <h4>Week 3</h4>
+      <p>Branding & Advertising</p>
+    </div>
+    <div class="program-card">
+      <h4>Week 4</h4>
+      <p>Sales & Execution</p>
+    </div>
+  </div>
+
+  <!-- Batches -->
+  <div class="batch-cards">
+    <div class="batch-card">
+      <h4>Batch 1</h4>
+      <div class="batch-detail">
+        <span>Orientation</span><span>April 19</span>
+      </div>
+      <div class="batch-detail">
+        <span>Program</span><span>April 20 - May 15</span>
+      </div>
+      <div class="batch-detail">
+        <span>Pitch Fest</span><span>May 16, Chennai (OMR)</span>
+      </div>
+    </div>
+    <div class="batch-card">
+      <h4>Batch 2</h4>
+      <div class="batch-detail">
+        <span>Orientation</span><span>April 30</span>
+      </div>
+      <div class="batch-detail">
+        <span>Program</span><span>May 4 - May 29</span>
+      </div>
+      <div class="batch-detail">
+        <span>Pitch Fest</span><span>May 30, Chennai (OMR)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Investment -->
+  <div class="investment-box">
+    <p class="section-label">Investment</p>
+    <div class="price-tag">Rs. 35,000 + GST</div>
+    <p class="price-sub">Rs. 5,000 deposit to secure spot &middot; Balance due by 29th</p>
+    <div class="guarantee-badge">100% Money-Back Guarantee if child doesn't pitch in 30 days</div>
+    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 12px;">(Provided they attend all classes and submit assignments)</p>
+    <a href="https://rzp.io/rzp/futurefounderslab" target="_blank" class="cta-btn accent-btn" style="margin-top: 28px;">Pre-Book Now - Rs. 5,000</a>
+  </div>
+
+  <!-- Bonuses -->
+  <p class="section-label">What's Included</p>
+  <div class="program-grid" style="margin-top: 20px;">
+    <div class="program-card">
+      <h4>Confidence & Public Speaking</h4>
+      <p>Valued at Rs. 12,000</p>
+    </div>
+    <div class="program-card">
+      <h4>Business Launch Frameworks</h4>
+      <p>Step-by-step, valued at Rs. 15,000</p>
+    </div>
+    <div class="program-card">
+      <h4>Real World Execution</h4>
+      <p>Shop interaction experience, valued at Rs. 7,000</p>
+    </div>
+    <div class="program-card">
+      <h4>Live Pitch Fest</h4>
+      <p>With successful entrepreneur judges</p>
+    </div>
+    <div class="program-card">
+      <h4>Weekly Progress Reports</h4>
+      <p>Parent skill development updates</p>
+    </div>
+    <div class="program-card">
+      <h4>Future Founders Inner Circle</h4>
+      <p>Ongoing community access</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- More Programs -->
+<section>
+  <p class="section-label">More from SEC</p>
+  <h2 class="section-title">Programs & Resources</h2>
+
+  <div class="tickets-grid" style="margin-top: 30px;">
+    <div class="ticket-card gold">
+      <div class="ticket-tier">AI Learning</div>
+      <h3>AI for Kids</h3>
+      <ul class="ticket-features">
+        <li>Dedicated AI learning platform for children</li>
+        <li>Designed by Social Eagle's AI team</li>
+        <li>Practical, hands-on AI education</li>
+      </ul>
+      <a href="https://kids.socialeagle.ai/" target="_blank" class="cta-btn gold-btn" style="font-size: 0.8rem; padding: 10px 24px; width: 100%; text-align: center;">Explore AI for Kids</a>
+    </div>
+
+    <div class="ticket-card silver">
+      <div class="ticket-tier">Live Webinar</div>
+      <h3>Sales Operating System</h3>
+      <ul class="ticket-features">
+        <li>Master the art of selling your skills</li>
+        <li>16-17 powerful conversion questions</li>
+        <li>Live Zoom session</li>
+      </ul>
+      <a href="https://us06web.zoom.us/webinar/register/2917739867273/WN_NO3z9IWZS9ePWf86LqXexA" target="_blank" class="cta-btn outline-btn" style="font-size: 0.8rem; padding: 10px 24px; width: 100%; text-align: center;">Register for SOS Webinar</a>
+    </div>
+
+    <div class="ticket-card diamond">
+      <div class="ticket-tier">Get Started</div>
+      <h3>Show Your Interest</h3>
+      <ul class="ticket-features">
+        <li>Interested in any SEC program?</li>
+        <li>Fill the form and get connected</li>
+        <li>First step to joining the community</li>
+      </ul>
+      <a href="https://forms.gle/PH3yMTrEFoRoC8PE6" target="_blank" class="cta-btn accent-btn" style="font-size: 0.8rem; padding: 10px 24px; width: 100%; text-align: center;">Express Interest</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Action Items -->
+<section>
+  <div class="action-footer">
+    <p class="section-label">Next Steps</p>
+    <h2 class="section-title">Action Items</h2>
+    <ul class="action-list">
+      <li>
+        <div class="action-check"></div>
+        <div>
+          <strong>Complete Eagle Award application form</strong>
+          <br><span style="color: var(--text-secondary); font-size: 0.85rem;">Fill your revenue category and submit</span>
+          <br><a href="https://forms.gle/EKEi1RLJSyctbsP17" target="_blank" style="color: var(--eagle-gold); font-size: 0.85rem; font-weight: 600;">Fill Form &rarr;</a>
+        </div>
+        <span class="action-priority priority-soon">Soon</span>
+      </li>
+      <li>
+        <div class="action-check"></div>
+        <div>
+          <strong>Register for TNDS 2025</strong>
+          <br><span style="color: var(--text-secondary); font-size: 0.85rem;">Community pricing expires tomorrow night. Choose Silver, Gold, or Diamond.</span>
+          <br><a href="https://2026.tndigitalsummit.com/" target="_blank" style="color: var(--eagle-gold); font-size: 0.85rem; font-weight: 600;">Register Now &rarr;</a>
+        </div>
+        <span class="action-priority priority-urgent">Urgent</span>
+      </li>
+      <li>
+        <div class="action-check"></div>
+        <div>
+          <strong>Register children for Future Founders Lab</strong>
+          <br><span style="color: var(--text-secondary); font-size: 0.85rem;">Rs. 5,000 deposit per child to secure spot</span>
+          <br><a href="https://rzp.io/rzp/futurefounderslab" target="_blank" style="color: var(--eagle-accent); font-size: 0.85rem; font-weight: 600;">Pre-Book Now &rarr;</a>
+        </div>
+        <span class="action-priority priority-soon">Soon</span>
+      </li>
+      <li>
+        <div class="action-check"></div>
+        <div>
+          <strong>Pay remaining Future Founders Lab balance</strong>
+          <br><span style="color: var(--text-secondary); font-size: 0.85rem;">Due by 29th of the month</span>
+        </div>
+        <span class="action-priority priority-soon">By 29th</span>
+      </li>
+      <li>
+        <div class="action-check"></div>
+        <div>
+          <strong>Provide individual names & email IDs</strong>
+          <br><span style="color: var(--text-secondary); font-size: 0.85rem;">Required for each TNDS ticket purchased</span>
+        </div>
+        <span class="action-priority priority-soon">After Booking</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<footer class="page-footer">
+  SOCIAL EAGLE COMMUNITY &middot; H2H &middot; HUMAN TO HUMAN, HEART TO HEART
+</footer>
+
+</body>
+</html>
